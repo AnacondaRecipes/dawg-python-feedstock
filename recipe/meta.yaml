@@ -11,27 +11,35 @@ source:
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
-  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
+    - python
 
 test:
   imports:
     - dawg_python
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/kmike/DAWG-Python/
   license: MIT
   license_family: MIT
-  license_file: LICENSE.txt
-  summary: 'Pure-python reader for DAWGs (DAFSAs) created by dawgdic C++ library or DAWG Python extension.'
+  license_file: LICENSE
+  summary: Pure-python reader for DAWGs (DAFSAs) created by dawgdic C++ library or DAWG Python extension.
+  description: |
+    Pure-python reader for DAWGs (DAFSAs) created by dawgdic C++ library or DAWG Python extension.
   doc_url: https://pypi.org/project/DAWG-Python/
+  dev_url: https://github.com/kmike/DAWG-Python/
 
 extra:
   recipe-maintainers:
